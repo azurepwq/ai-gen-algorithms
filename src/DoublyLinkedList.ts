@@ -58,6 +58,20 @@ class DoublyLinkedList<T> {
   isEmpty(): boolean {
       return this.count === 0; // Return true if count is zero
   }
+
+  find(value: T): T | null {
+      let current = this.head;
+      // To prevent infinite loop in case of a circular list, limit traversal to at most 'count' nodes
+      let traversed = 0;
+      while (current && traversed < this.count) {
+          if (current.value === value) {
+              return current.value; // Return the value if found
+          }
+          current = current.next;
+          traversed++;
+      }
+      return null; // Return null if not found
+  }
 }
 
 export default DoublyLinkedList;
